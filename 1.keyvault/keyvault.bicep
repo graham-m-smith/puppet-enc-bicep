@@ -3,6 +3,7 @@ param location string = 'uksouth'
 
 param mysqladmin_password string
 param aduser string
+param MACBOOK_IP string
 param ENC_UI_DB_TYPE string
 param ENC_UI_DB_USER string
 param ENC_UI_DB_PASS string
@@ -160,5 +161,13 @@ resource secret14 'Microsoft.KeyVault/vaults/secrets@2021-11-01-preview' = {
   name: '${keyvault.name}/ENC-UI-SECRET-KEY'
   properties: {
     value: ENC_UI_SECRET_KEY
+  }
+}
+
+// Secret for 
+resource secret15 'Microsoft.KeyVault/vaults/secrets@2021-11-01-preview' = {
+  name: '${keyvault.name}/MACBOOK-IP'
+  properties: {
+    value: MACBOOK_IP
   }
 }

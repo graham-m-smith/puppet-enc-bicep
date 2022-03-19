@@ -17,5 +17,6 @@ module mysqldb 'mysqldb_create.bicep' = {
     puppetenc_db_name: puppetenc_db_name
     administratorLoginPassword: keyvault.getSecret('MYSQL-ADMIN-PASSWORD')
     mysqldb_name: mysqldb_name
+    macbook_ip: keyvault.getSecret('MACBOOK-IP')
   }
 }

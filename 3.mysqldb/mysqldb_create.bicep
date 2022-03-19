@@ -5,6 +5,9 @@ param puppetenc_db_name string
 @secure()
 param administratorLoginPassword string
 
+@secure()
+param macbook_ip string
+
 param administratorLogin string = 'mysqladmin'
 param serverEdition string = 'Burstable'
 param vCores int = 4
@@ -60,7 +63,7 @@ resource mysqldb 'Microsoft.DBforMySQL/flexibleServers@2021-05-01' = {
       mode: haEnabled
       standbyAvailabilityZone: standbyAvailabilityZone
     }
-    dataencryption: (empty(dataEncryptionData) ? json('null') : dataEncryptionData)
+    dataEncryption: (empty(dataEncryptionData) ? json('null') : dataEncryptionData)
   }
   sku: {
     name: vmName
@@ -81,19 +84,24 @@ resource puppetenc 'Microsoft.DBforMySQL/flexibleServers/databases@2021-05-01' =
   ]
 }
 
-/*
-@batchSize(1)
-module firewallRules_resource './nested_firewallRules_resource.bicep' = [for i in range(0, ((length(firewallRules_var) > 0) ? length(firewallRules_var) : 1)): {
-  name: 'firewallRules-${i}'
-  params: {
-    variables_firewallRules_copyIndex_name: firewallRules_var
-    variables_api: api
-    variables_firewallRules_copyIndex_startIPAddress: firewallRules_var
-    variables_firewallRules_copyIndex_endIPAddress: firewallRules_var
-    serverName: serverName
+resource mysqldb_fwrules_allazure 'Microsoft.DBforMySQL/flexibleServers/firewallRules@2021-05-01' = {
+  name: '${mysqldb.name}/allazure'
+  properties: {
+    endIpAddress: '0.0.0.0'
+    startIpAddress: '0.0.0.0'
   }
   dependsOn: [
-    serverName_resource
+    mysqldb
   ]
-}]
-*/
+}
+
+resource mysqldb_fwrules_macbook 'Microsoft.DBforMySQL/flexibleServers/firewallRules@2021-05-01' = {
+  name: '${mysqldb.name}/macbook'
+  properties: {
+    endIpAddress: macbook_ip
+    startIpAddress: macbook_ip
+  }
+  dependsOn: [
+    mysqldb
+  ]
+}
