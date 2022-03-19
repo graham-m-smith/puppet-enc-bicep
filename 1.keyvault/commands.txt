@@ -5,4 +5,4 @@ az deployment group create
     --template-file keyvault.bicep 
     --parameters @keyvault_oarameters.json
 
-    --parameters mysqladmin_password=<password> aduser=b42bed7b-f907-42d5-9d9d-77062da6a102
+#    --parameters mysqladmin_password=<password> aduser=b42bed7b-f907-42d5-9d9d-77062da6a102

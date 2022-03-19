@@ -56,6 +56,9 @@ resource functionApp 'Microsoft.Web/sites@2020-06-01' = {
     serverFarmId: hostingPlan.id
     clientAffinityEnabled: true
     siteConfig: {
+      use32BitWorkerProcess: true
+      powerShellVersion: '~7'
+      netFrameworkVersion: 'v6.0'
       appSettings: [
         {
           'name': 'APPINSIGHTS_INSTRUMENTATIONKEY'
@@ -67,11 +70,11 @@ resource functionApp 'Microsoft.Web/sites@2020-06-01' = {
         }
         {
           'name': 'FUNCTIONS_EXTENSION_VERSION'
-          'value': '~3'
+          'value': '~4'
         }
         {
           'name': 'FUNCTIONS_WORKER_RUNTIME'
-          'value': 'dotnet'
+          'value': 'powershell'
         }
         {
           name: 'WEBSITE_CONTENTAZUREFILECONNECTIONSTRING'
@@ -89,6 +92,20 @@ resource functionApp 'Microsoft.Web/sites@2020-06-01' = {
     storageAccount
   ]
 }
+
+// Set-up source control 
+var repositoryUrl = 'https://github.com/graham-m-smith/puppet-enc-scheduler-azfunc.git'
+var branch = 'master'
+
+resource srcControls 'Microsoft.Web/sites/sourcecontrols@2021-01-01' = {
+  name: '${functionApp.name}/web'
+  properties: {
+    repoUrl: repositoryUrl
+    branch: branch
+    isManualIntegration: true
+  }
+}
+
 
 // Grant function app contributor role on containers resource group
 module roleassign 'role_assignment.bicep' = {
