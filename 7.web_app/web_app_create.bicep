@@ -71,6 +71,7 @@ resource hostingPlan 'Microsoft.Web/serverfarms@2021-03-01' = {
   }
 }
 
+// App Service 
 resource webapp 'Microsoft.Web/sites@2021-03-01' = {
   name: wa_name
   location: location
@@ -195,7 +196,6 @@ resource kvaccesspolicy 'Microsoft.KeyVault/vaults/accessPolicies@2021-11-01-pre
           certificates: []
         }
       }
-    
     ]
   }
 }
