@@ -84,6 +84,8 @@ resource puppetenc 'Microsoft.DBforMySQL/flexibleServers/databases@2021-05-01' =
   ]
 }
 
+
+// Allow Access from all Azure F/W Rule
 resource mysqldb_fwrules_allazure 'Microsoft.DBforMySQL/flexibleServers/firewallRules@2021-05-01' = {
   name: '${mysqldb.name}/allazure'
   properties: {
@@ -95,6 +97,7 @@ resource mysqldb_fwrules_allazure 'Microsoft.DBforMySQL/flexibleServers/firewall
   ]
 }
 
+// Allow access from my MacBook
 resource mysqldb_fwrules_macbook 'Microsoft.DBforMySQL/flexibleServers/firewallRules@2021-05-01' = {
   name: '${mysqldb.name}/macbook'
   properties: {
