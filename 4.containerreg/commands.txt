@@ -3,3 +3,21 @@ az group create --name uks-infra-puppetenc-containers --location uksouth
 az deployment group create 
     --resource-group uks-infra-puppetenc-containers
     --template-file containerreg.bicep
+
+
+az login
+az acr login --name cregpuppetencgmsdev
+docker tag puppet-enc-configgen:v1 cregpuppetencgmsdev.azurecr.io/puppet-enc-configgen:v1
+docker tag puppet-enc-dyngroups:v1 cregpuppetencgmsdev.azurecr.io/puppet-enc-dyngroups:v1
+docker tag puppet-enc-genfact:v1 cregpuppetencgmsdev.azurecr.io/puppet-enc-genfact:v1
+docker tag puppet-enc-syncdb:v1 cregpuppetencgmsdev.azurecr.io/puppet-enc-syncdb:v1
+docker push cregpuppetencgmsdev.azurecr.io/puppet-enc-configgen:v1
+docker push cregpuppetencgmsdev.azurecr.io/puppet-enc-dyngroups:v1
+docker push cregpuppetencgmsdev.azurecr.io/puppet-enc-genfact:v1
+docker push cregpuppetencgmsdev.azurecr.io/puppet-enc-syncdb:v1
+
+add secrets to keyvault
+CONTAINER-REG-NAME 
+CONTAINER-REG-USER
+CONTAINER-REG-PASS
+CONTAINER-RG

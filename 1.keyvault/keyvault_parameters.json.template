@@ -1,0 +1,54 @@
+{
+    "$schema": "https://schema.management.azure.com/schemas/2019-04-01/deploymentParameters.json#",
+    "contentVersion": "1.0.0.0",
+    "parameters": {
+      "mysqladmin_password": {
+        "value": "<XXX>"
+      },
+      "aduser": {
+        "value": "<XXX>"
+      },
+      "MACBOOK_IP": {
+          "value": "<XXX>"
+      },
+      "ENC_UI_DB_TYPE": {
+        "value": "mysql"
+      },
+      "ENC_UI_DB_NAME": {
+        "value": "puppetenc"
+      },
+      "ENC_UI_DB_PASS": {
+        "value": "<XXX>"
+      },
+      "ENC_UI_DB_PORT": {
+        "value": "3306"
+      },
+      "ENC_UI_DB_SSL_CA": {
+        "value": "DigiCertGlobalRootCA.crt.pem"
+      },
+      "ENC_UI_DB_USER": {
+        "value": "puppetenc"
+      },
+      "ENC_UI_DUO_API_HOSTNAME": {
+        "value": "<XXX>"
+      },
+      "ENC_UI_DUO_CLIENT_ID": {
+        "value": "<XXX>"
+      },
+      "ENC_UI_DUO_CLIENT_SECRET": {
+        "value": "<XXX>"
+      },
+      "ENC_UI_DUO_ENABLED": {
+        "value": "True"
+      },
+      "ENC_UI_DUO_FAILMODE": {
+        "value": "closed"
+      },
+      "ENC_UI_DUO_REDIRECT_URL": {
+        "value": "<XXX>"
+      },
+      "ENC_UI_SECRET_KEY": {
+        "value": "<XXX>"
+      }
+    }
+  }
