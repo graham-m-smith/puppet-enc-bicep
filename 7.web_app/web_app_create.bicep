@@ -1,49 +1,15 @@
 param wa_name string
 param location string
 param keyvault_name string
-param mysqldb_name string
-
-@secure()
-param enc_database_type string
-@secure()
-param enc_db_name string
-@secure()
-param enc_db_port string
-@secure()
-param enc_db_ssl_ca string
-@secure()
-param enc_db_user string
-@secure()
-param enc_duo_api_hostname string
-@secure()
-param enc_duo_enabled string
-@secure()
-param enc_duo_failmode string
-@secure()
-param enc_duo_redirect_url string
-@secure()
-param enc_secret_key string
-@secure()
-param enc_db_pass string
-@secure()
-param enc_duo_client_id string
-@secure()
-param enc_duo_client_secret string
+param repositoryUrl string
+param branch string
 
 var hostingPlanName = 'ASP-${wa_name}${uniqueString(resourceGroup().id)}'
-
-// Reference to MySQL Database
-resource mysqldb 'Microsoft.DBforMySQL/flexibleServers@2021-05-01' existing = {
-  name: mysqldb_name
-}
 
 // Reference to KeyVault
 resource keyvault 'Microsoft.KeyVault/vaults@2021-11-01-preview' existing = {
   name: keyvault_name
 }
-
-// Get MySQL DB FQDN
-var enc_db_host = mysqldb.properties.fullyQualifiedDomainName
 
 // App Service Plan
 resource hostingPlan 'Microsoft.Web/serverfarms@2021-03-01' = {
@@ -95,62 +61,10 @@ resource webapp 'Microsoft.Web/sites@2021-03-01' = {
       minimumElasticInstanceCount: 1
       appSettings: [
         {
-          name: 'PUPPET_ENC_UI_DATABASE_TYPE'
-          value: enc_database_type
+          name: 'ENC_UI_KEYVAULT'
+          value: keyvault_name
         }
-        {
-          name: 'PUPPET_ENC_UI_DB_HOST'
-          value: enc_db_host
-        }
-        {
-          name: 'PUPPET_ENC_UI_DB_NAME'
-          value: enc_db_name
-        }
-        {
-          name: 'PUPPET_ENC_UI_DB_PASS'
-          value: enc_db_pass
-        }
-        {
-          name: 'PUPPET_ENC_UI_DB_PORT'
-          value: enc_db_port
-        }
-        {
-          name: 'PUPPET_ENC_UI_DB_SSL_CA'
-          value: enc_db_ssl_ca
-        }
-        {
-          name: 'PUPPET_ENC_UI_DB_USER'
-          value: enc_db_user
-        }
-        {
-          name: 'PUPPET_ENC_UI_DUO_API_HOSTNAME'
-          value: enc_duo_api_hostname
-        }
-        {
-          name: 'PUPPET_ENC_UI_DUO_CLIENT_ID'
-          value: enc_duo_client_id
-        }
-        {
-          name: 'PUPPET_ENC_UI_DUO_CLIENT_SECRET'
-          value: enc_duo_client_secret
-        }
-        {
-          name: 'PUPPET_ENC_UI_DUO_ENABLED'
-          value: enc_duo_enabled
-        }
-        {
-          name: 'PUPPET_ENC_UI_DUO_FAILMODE'
-          value: enc_duo_failmode
-        }
-        {
-          name: 'PUPPET_ENC_UI_DUO_REDIRECT_URL'
-          value: enc_duo_redirect_url
-        }
-        {
-          name: 'PUPPET_ENC_UI_SECRET_KEY'
-          value: enc_secret_key
-        }
-      ]
+       ]
     }
     clientAffinityEnabled: false
     clientCertEnabled: false
@@ -162,20 +76,6 @@ resource webapp 'Microsoft.Web/sites@2021-03-01' = {
     redundancyMode: 'None'
     storageAccountRequired: false
     keyVaultReferenceIdentity: 'SystemAssigned'
-  }
-}
-
-
-// Set-up source control 
-var repositoryUrl = 'https://github.com/graham-m-smith/puppet-enc-ui.git'
-var branch = 'main'
-
-resource srcControls 'Microsoft.Web/sites/sourcecontrols@2021-01-01' = {
-  name: '${webapp.name}/web'
-  properties: {
-    repoUrl: repositoryUrl
-    branch: branch
-    isManualIntegration: true
   }
 }
 
@@ -199,3 +99,14 @@ resource kvaccesspolicy 'Microsoft.KeyVault/vaults/accessPolicies@2021-11-01-pre
     ]
   }
 }
+
+// Set-up source control 
+resource srcControls 'Microsoft.Web/sites/sourcecontrols@2021-01-01' = {
+  name: '${webapp.name}/web'
+  properties: {
+    repoUrl: repositoryUrl
+    branch: branch
+    isManualIntegration: true
+  }
+}
+

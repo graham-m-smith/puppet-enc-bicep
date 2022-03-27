@@ -3,4 +3,9 @@ az group create --name uks-infra-puppetenc --location uksouth
 az deployment group create 
     --resource-group uks-infra-puppetenc
     --template-file keyvault.bicep 
-    --parameters @keyvault_oarameters.json
+    --parameters @keyvault_parameters.json
+
+az deployment group create 
+    --resource-group uks-infra-puppetenc
+    --template-file secrets.bicep 
+    --parameters @secrets_parameters.json
