@@ -1,10 +1,10 @@
-param sa_name string = 'sapuppetenc'
-param location string = 'uksouth'
-param config_container_name string = 'enc-config'
-param facts_container_name string = 'enc-facts'
-param syncdb_container_name string = 'enc-syncdb'
-param keyvault_name string = 'kv-puppetenc'
-param connection_string_secret_name string = 'SA-CONNECTION-STRING'
+param sa_name string
+param location string = resourceGroup().location
+param config_container_name string
+param facts_container_name string
+param syncdb_container_name string
+param keyvault_name string
+param connection_string_secret_name string
 
 // Storage Account
 resource sa 'Microsoft.Storage/storageAccounts@2021-08-01' = {

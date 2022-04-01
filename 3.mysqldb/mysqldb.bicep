@@ -1,8 +1,7 @@
-param mysqldb_name string = 'mysqldb-puppetenc-gmsdev'
-param location string = 'uksouth'
-param puppetenc_db_name string = 'puppetenc'
-
-param keyvault_name string = 'kv-puppetenc'
+param mysqldb_name string
+param location string = resourceGroup().location
+param puppetenc_db_name string
+param keyvault_name string
 
 // Reference to KeyVault
 resource keyvault 'Microsoft.KeyVault/vaults@2021-11-01-preview' existing = {

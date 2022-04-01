@@ -1,0 +1,18 @@
+{
+    "$schema": "https://schema.management.azure.com/schemas/2019-04-01/deploymentParameters.json#",
+    "contentVersion": "1.0.0.0",
+    "parameters": {
+     "keyvault_name": {
+        "value": ""
+      },
+      "wa_name": {
+        "value": ""
+      },
+      "repositoryUrl": {
+        "value": ""
+      },
+      "branch": {
+        "value": ""
+      }
+    }
+  }

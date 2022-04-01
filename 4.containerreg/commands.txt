@@ -1,8 +1,6 @@
 az group create --name uks-infra-puppetenc-containers --location uksouth
 
-az deployment group create 
-    --resource-group uks-infra-puppetenc-containers
-    --template-file containerreg.bicep
+az deployment group create --resource-group uks-infra-puppetenc-containers --template-file container_registry.bicep --parameters @container_registry_parameters.json
 
 
 az login

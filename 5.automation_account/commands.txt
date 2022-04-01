@@ -1,0 +1,1 @@
+az deployment group create --resource-group uks-infra-puppetenc --template-file automation_account.bicep --parameters @automation_account_parameters.json

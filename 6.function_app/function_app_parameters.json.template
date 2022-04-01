@@ -2,11 +2,14 @@
     "$schema": "https://schema.management.azure.com/schemas/2019-04-01/deploymentParameters.json#",
     "contentVersion": "1.0.0.0",
     "parameters": {
-      "keyvault_name": {
-          "value": ""
+        "fa_name": {
+            "value": ""
         },
-        "aduser": {
-          "value": ""
+        "container_rg_name": {
+            "value": ""
+        },
+        "keyvault_name": {
+            "value": ""
         }
     }
-  }
+}

@@ -1,0 +1,1 @@
+az deployment group create --resource-group uks-infra-puppetenc --template-file web_app.bicep --parameters @web_app_parameters.json

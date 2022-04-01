@@ -1,5 +1,5 @@
-param container_reg_name string = 'cregpuppetencgmsdev'
-param location string = 'uksouth'
+param container_reg_name string
+param location string = resourceGroup().location
 
 resource containerreg 'Microsoft.ContainerRegistry/registries@2021-12-01-preview' = {
   name: container_reg_name

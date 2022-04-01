@@ -1,0 +1,24 @@
+{
+    "$schema": "https://schema.management.azure.com/schemas/2019-04-01/deploymentParameters.json#",
+    "contentVersion": "1.0.0.0",
+    "parameters": {
+        "sa_name": {
+            "value": ""
+        },
+        "config_container_name": {
+            "value": ""
+        },
+        "facts_container_name": {
+            "value": ""
+        },
+        "syncdb_container_name": {
+            "value": ""
+        },
+        "keyvault_name": {
+            "value": ""
+        },
+        "connection_string_secret_name": {
+            "value": ""
+        }
+    }
+}

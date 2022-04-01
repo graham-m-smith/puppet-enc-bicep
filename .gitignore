@@ -1,3 +1,8 @@
 keyvault_parameters.json
 secrets_parameters.json
 web_app_parameters.json
+function_app_parameters.json
+storage_account_parameters.json
+mysqldb_parameters.json
+container_registry_parameters.json
+automation_account_parameters.json
