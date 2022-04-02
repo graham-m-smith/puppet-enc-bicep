@@ -6,10 +6,20 @@ param syncdb_container_name string
 param keyvault_name string
 param connection_string_secret_name string
 
+param tag_values object = {
+  Department: 'Infrastructure'
+  Business_Unit: 'DTS'
+  Environment: 'DEV'
+  DeployMethod: 'Bicep'
+  LastDeploy: utcNow('d')
+  Project: 'Puppet-ENC'
+}
+
 // Storage Account
 resource sa 'Microsoft.Storage/storageAccounts@2021-08-01' = {
   name: sa_name
   location: location
+  tags: tag_values
   sku: {
     name: 'Standard_LRS'
   }

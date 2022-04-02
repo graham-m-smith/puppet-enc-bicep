@@ -8,6 +8,8 @@ param administratorLoginPassword string
 @secure()
 param macbook_ip string
 
+param tag_values object
+
 param administratorLogin string = 'mysqladmin'
 param serverEdition string = 'Burstable'
 param vCores int = 4
@@ -70,7 +72,7 @@ resource mysqldb 'Microsoft.DBforMySQL/flexibleServers@2021-05-01' = {
     tier: serverEdition
     capacity: vCores
   }
-  tags: tags
+  tags: tag_values
 }
 
 resource puppetenc 'Microsoft.DBforMySQL/flexibleServers/databases@2021-05-01' = {

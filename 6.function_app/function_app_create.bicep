@@ -1,6 +1,7 @@
 param fa_name string
 param location string
 param container_rg_name string
+param tag_values object
 
 @secure()
 param sa_connection_string string
@@ -14,6 +15,7 @@ var functionAppName = fa_name
 resource storageAccount 'Microsoft.Storage/storageAccounts@2019-06-01' = {
   name: storageAccountName
   location: location
+  tags: tag_values
   kind: 'StorageV2'
   sku: {
     name: 'Standard_LRS'
@@ -40,6 +42,7 @@ resource appInsights 'Microsoft.Insights/components@2020-02-02-preview' = {
 resource hostingPlan 'Microsoft.Web/serverfarms@2020-10-01' = {
   name: hostingPlanName
   location: location
+  tags: tag_values
   sku: {
     name: 'Y1' 
     tier: 'Dynamic'
@@ -50,6 +53,7 @@ resource hostingPlan 'Microsoft.Web/serverfarms@2020-10-01' = {
 resource functionApp 'Microsoft.Web/sites@2020-06-01' = {
   name: functionAppName
   location: location
+  tags: tag_values
   kind: 'functionapp'
   identity: {
     type: 'SystemAssigned'

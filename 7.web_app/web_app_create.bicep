@@ -3,6 +3,7 @@ param location string
 param keyvault_name string
 param repositoryUrl string
 param branch string
+param tag_values object
 
 var hostingPlanName = 'ASP-${wa_name}${uniqueString(resourceGroup().id)}'
 
@@ -15,6 +16,7 @@ resource keyvault 'Microsoft.KeyVault/vaults@2021-11-01-preview' existing = {
 resource hostingPlan 'Microsoft.Web/serverfarms@2021-03-01' = {
   name: hostingPlanName
   location: location
+  tags: tag_values
   sku: {
     name: 'B1'
     tier: 'Basic'
@@ -41,6 +43,7 @@ resource hostingPlan 'Microsoft.Web/serverfarms@2021-03-01' = {
 resource webapp 'Microsoft.Web/sites@2021-03-01' = {
   name: wa_name
   location: location
+  tags: tag_values
   kind: 'app.linux'
   identity: {
     type: 'SystemAssigned'

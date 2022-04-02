@@ -3,6 +3,15 @@ param location string = resourceGroup().location
 param keyvault_name string
 param container_rg_name string
 
+param tag_values object = {
+  Department: 'Infrastructure'
+  Business_Unit: 'DTS'
+  Environment: 'DEV'
+  DeployMethod: 'Bicep'
+  LastDeploy: utcNow('d')
+  Project: 'Puppet-ENC'
+}
+
 // Reference to KeyVault
 resource keyvault 'Microsoft.KeyVault/vaults@2021-11-01-preview' existing = {
   name: keyvault_name
@@ -12,6 +21,7 @@ resource keyvault 'Microsoft.KeyVault/vaults@2021-11-01-preview' existing = {
 resource aa 'Microsoft.Automation/automationAccounts@2021-06-22' = {
   name: aa_name
   location: location
+  tags: tag_values
   identity: {
     type: 'SystemAssigned'
   }

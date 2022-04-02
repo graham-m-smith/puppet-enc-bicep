@@ -3,6 +3,15 @@ param location string = resourceGroup().location
 param puppetenc_db_name string
 param keyvault_name string
 
+param tag_values object = {
+  Department: 'Infrastructure'
+  Business_Unit: 'DTS'
+  Environment: 'DEV'
+  DeployMethod: 'Bicep'
+  LastDeploy: utcNow('d')
+  Project: 'Puppet-ENC'
+}
+
 // Reference to KeyVault
 resource keyvault 'Microsoft.KeyVault/vaults@2021-11-01-preview' existing = {
   name: keyvault_name
@@ -17,6 +26,7 @@ module mysqldb 'mysqldb_create.bicep' = {
     administratorLoginPassword: keyvault.getSecret('MYSQL-ADMIN-PASSWORD')
     mysqldb_name: mysqldb_name
     macbook_ip: keyvault.getSecret('MACBOOK-IP')
+    tag_values: tag_values
   }
 }
 
