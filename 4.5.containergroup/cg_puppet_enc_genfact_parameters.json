@@ -1,0 +1,30 @@
+{
+    "$schema": "https://schema.management.azure.com/schemas/2019-04-01/deploymentParameters.json#",
+    "contentVersion": "1.0.0.0",
+    "parameters": {
+        "keyvault_name": {
+            "value": "kv-puppetenc"
+        },
+        "keyvault_rg": {
+            "value": "uks-infra-puppetenc"
+        },
+        "container_name": {
+            "value": "puppet-enc-genfact"
+        },
+        "image_tag": {
+            "value": "v1"
+        },
+        "memory_gb": {
+            "value": 2
+        },
+        "num_cpus": {
+            "value": 2
+        },
+        "restart_policy": {
+            "value": "Never"
+        },
+        "os_type": {
+            "value": "linux"
+        }
+    }
+}

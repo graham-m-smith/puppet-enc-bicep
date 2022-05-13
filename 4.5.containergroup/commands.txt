@@ -1,0 +1,7 @@
+az deployment group create --resource-group uks-infra-puppetenc-containers --template-file container_group.bicep --parameters @cg_puppet_enc_configgen_parameters.json
+
+az deployment group create --resource-group uks-infra-puppetenc-containers --template-file container_group.bicep --parameters @cg_puppet_enc_dyngroups_parameters.json
+
+az deployment group create --resource-group uks-infra-puppetenc-containers --template-file container_group.bicep --parameters @cg_puppet_enc_genfact_parameters.json
+
+az deployment group create --resource-group uks-infra-puppetenc-containers --template-file container_group.bicep --parameters @cg_puppet_enc_syncdb_parameters.json
