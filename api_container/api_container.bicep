@@ -10,7 +10,7 @@ resource containerGroup 'Microsoft.ContainerInstance/containerGroups@2021-03-01'
       {
         server: 'cregpuppetencgmsdev.azurecr.io'
         username: 'cregpuppetencgmsdev'
-        password: 'bnqR1h/varBgiIeMZCg4L1glMDdvjDdw'
+        password: ''
       }
     ]
     containers: [
