@@ -15,6 +15,8 @@ param ENC_UI_DUO_FAILMODE string
 param ENC_UI_DUO_REDIRECT_URL string
 param ENC_UI_SECRET_KEY string
 param ENC_UI_LOCAL_AUTH string
+param ENC_API_AAD_CLIENT_ID string
+param ENC_API_AAD_TENANT_ID string
 
 // Reference to KeyVault
 resource keyvault 'Microsoft.KeyVault/vaults@2021-11-01-preview' existing = {
@@ -145,5 +147,19 @@ resource secret16 'Microsoft.KeyVault/vaults/secrets@2021-11-01-preview' = {
   name: '${keyvault.name}/ENC-UI-LOCAL-AUTH'
   properties: {
     value: ENC_UI_LOCAL_AUTH
+  }
+}
+// Secret for 
+resource secret17 'Microsoft.KeyVault/vaults/secrets@2021-11-01-preview' = {
+  name: '${keyvault.name}/ENC-API-AAD-CLIENT-ID'
+  properties: {
+    value: ENC_API_AAD_CLIENT_ID
+  }
+}
+// Secret for 
+resource secret18 'Microsoft.KeyVault/vaults/secrets@2021-11-01-preview' = {
+  name: '${keyvault.name}/ENC-API-AAD-TENANT-ID'
+  properties: {
+    value: ENC_API_AAD_TENANT_ID
   }
 }
