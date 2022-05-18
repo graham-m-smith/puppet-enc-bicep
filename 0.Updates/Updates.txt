@@ -1,0 +1,18 @@
+Bicep
+    - Add secret to keyvault
+    - Add API function app in new rg
+    - Move Scheduler function app to new rg
+    - Remove Automation Account
+
+UI
+    - Remove API
+
+ENC Module
+    - Add AAD token updates
+
+CLI
+    - Add AAD token updates
+
+API
+    - New repo for API
+    - Deploy to FA
