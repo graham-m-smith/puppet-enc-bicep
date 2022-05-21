@@ -1,1 +1,3 @@
-az deployment group create --resource-group uks-infra-puppetenc --template-file function_app.bicep --parameters @function_app_parameters.json
+az group create --name uks-infra-puppetenc-scheduler --location uksouth
+
+az deployment group create --resource-group uks-infra-puppetenc-scheduler --template-file function_app.bicep --parameters @function_app_parameters.json

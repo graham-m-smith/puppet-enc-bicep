@@ -2,6 +2,8 @@ param fa_name string
 param location string
 param container_rg_name string
 param tag_values object
+param keyvault_name string
+param keyvault_rg string
 
 @secure()
 param sa_connection_string string
@@ -130,4 +132,12 @@ module roleassign '../modules/role_assignment.bicep' = {
   ]
 }
 
+module kvaccess '../modules/keyvault_access.bicep' = {
+  name: 'fa-kv-access'
+  scope: resourceGroup(keyvault_rg)
+  params: {
+    object_id: functionApp.identity.principalId
+    keyvault_name: keyvault_name
+  }
+}
 
