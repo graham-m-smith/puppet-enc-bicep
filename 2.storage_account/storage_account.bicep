@@ -3,6 +3,7 @@ param location string = resourceGroup().location
 param config_container_name string
 param facts_container_name string
 param syncdb_container_name string
+param node_hiera_container_name string
 param keyvault_name string
 param connection_string_secret_name string
 
@@ -49,6 +50,12 @@ resource facts_container 'Microsoft.Storage/storageAccounts/blobServices/contain
 // Container for ENC SyncDB JSON File
 resource syncdb_container 'Microsoft.Storage/storageAccounts/blobServices/containers@2021-08-01' = {
   name: '${sa.name}/default/${syncdb_container_name}'
+  properties: {}
+}
+
+// Container for ENC Node Hiera Data
+resource node_hiera_container 'Microsoft.Storage/storageAccounts/blobServices/containers@2021-08-01' = {
+  name: '${sa.name}/default/${node_hiera_container_name}'
   properties: {}
 }
 
