@@ -53,12 +53,6 @@ resource syncdb_container 'Microsoft.Storage/storageAccounts/blobServices/contai
   properties: {}
 }
 
-// Container for ENC Node Hiera Data
-resource node_hiera_container 'Microsoft.Storage/storageAccounts/blobServices/containers@2021-08-01' = {
-  name: '${sa.name}/default/${node_hiera_container_name}'
-  properties: {}
-}
-
 // Reference to KeyVault
 resource keyvault 'Microsoft.KeyVault/vaults@2021-11-01-preview' existing = {
   name: keyvault_name

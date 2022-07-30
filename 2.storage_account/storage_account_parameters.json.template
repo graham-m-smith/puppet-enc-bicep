@@ -14,9 +14,6 @@
         "syncdb_container_name": {
             "value": ""
         },
-        "node_hiera_container_name": {
-            "value": ""
-        },
          "keyvault_name": {
             "value": ""
         },
