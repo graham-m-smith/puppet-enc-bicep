@@ -18,6 +18,7 @@ param ENC_UI_LOCAL_AUTH string
 param ENC_API_AAD_CLIENT_ID string
 param ENC_API_AAD_TENANT_ID string
 param ENC_UI_DISABLE_API string
+param ENC_API_TOKEN_TYPE string
 
 // Reference to KeyVault
 resource keyvault 'Microsoft.KeyVault/vaults@2021-11-01-preview' existing = {
@@ -169,5 +170,12 @@ resource secret19 'Microsoft.KeyVault/vaults/secrets@2021-11-01-preview' = {
   name: '${keyvault.name}/ENC-UI-DISABLE-API'
   properties: {
     value: ENC_UI_DISABLE_API
+  }
+}
+// Secret for 
+resource secret20 'Microsoft.KeyVault/vaults/secrets@2021-11-01-preview' = {
+  name: '${keyvault.name}/ENC-API-TOKEN-TYPE'
+  properties: {
+    value: ENC_API_TOKEN_TYPE
   }
 }
