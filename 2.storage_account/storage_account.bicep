@@ -3,9 +3,9 @@ param location string = resourceGroup().location
 param config_container_name string
 param facts_container_name string
 param syncdb_container_name string
-param node_hiera_container_name string
+param puppet_class_container_name string
 param keyvault_name string
-param connection_string_secret_name string
+param connection_string_name string
 
 param tag_values object = {
   Department: 'Infrastructure'
@@ -53,6 +53,12 @@ resource syncdb_container 'Microsoft.Storage/storageAccounts/blobServices/contai
   properties: {}
 }
 
+// Container for ENC Puppet Classes JSON File
+resource puppet_classes_container 'Microsoft.Storage/storageAccounts/blobServices/containers@2021-08-01' = {
+  name: '${sa.name}/default/${puppet_class_container_name}'
+  properties: {}
+}
+
 // Reference to KeyVault
 resource keyvault 'Microsoft.KeyVault/vaults@2021-11-01-preview' existing = {
   name: keyvault_name
@@ -60,7 +66,7 @@ resource keyvault 'Microsoft.KeyVault/vaults@2021-11-01-preview' existing = {
 
 // Store the connection string in Keyvault
 resource storageAccountConnectionString 'Microsoft.KeyVault/vaults/secrets@2019-09-01' = {
-  name: '${keyvault.name}/${connection_string_secret_name}'
+  name: '${keyvault.name}/${connection_string_name}'
   properties: {
     value: 'DefaultEndpointsProtocol=https;AccountName=${sa.name};AccountKey=${listKeys(sa.id, sa.apiVersion).keys[0].value};EndpointSuffix=${environment().suffixes.storage}'
   }

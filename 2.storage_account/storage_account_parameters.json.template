@@ -14,6 +14,9 @@
         "syncdb_container_name": {
             "value": ""
         },
+        "puppet_class_container_name": {
+            "value": ""
+        },
          "keyvault_name": {
             "value": ""
         },
